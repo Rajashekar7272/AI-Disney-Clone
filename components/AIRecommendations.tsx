@@ -60,7 +60,7 @@ Do not include any extra text like 'Here are' or numbering outside this.`,
               <span className="text-yellow-500 ml-2 text-xl">Rating: {rating}</span>
             )}
             {description && (
-              <p className="mt-1 text-gray-200">{description}</p>
+              <p className="mt-1 text-black dark:text-white">{description}</p>
             )}
           </li>
         ))}
