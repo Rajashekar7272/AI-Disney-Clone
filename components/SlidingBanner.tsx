@@ -13,55 +13,62 @@ type Props = {
 
 Autoplay.globalOptions = { delay: 4000 };
 
-function SlidingBanner({ movies }: Props) {
-  const [emblaRef] = useEmblaCarousel({ loop: true, duration: 100 }, [
-    Autoplay(),
-  ]);
+export default function SlidingBanner({ movies }: Props) {
+  const [emblaRef] = useEmblaCarousel(
+    { loop: true, duration: 100 },
+    [Autoplay()]
+  );
 
   return (
     <div
-      className="overflow-hidden relative w-full h-[50vh] md:h-[70vh] lg:h-[85vh] 2xl:h-[95vh]"
       ref={emblaRef}
+      className="relative w-full overflow-hidden h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[85vh] 2xl:h-[95vh]"
     >
       <div className="flex h-full">
         {movies.map((movie) => (
-          <div key={movie.id} className="relative min-w-full">
+          <div key={movie.id} className="relative min-w-full h-full">
+            {/* Full‑bleed cover image */}
             <Image
               src={getImagePath(
                 movie.backdrop_path || movie.poster_path || undefined,
                 true
               )}
               alt={movie.title}
-              width={3840}
-              height={2160}
-              priority
-              quality={100}
-              className="w-full h-fit object-cover object-center transition-transform duration-700 ease-in-out"
+              fill
               sizes="100vw"
+              quality={80}
+              className="object-cover object-center"
+              priority
             />
 
-            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/60 to-black/90">
-              <div className="absolute bottom-0 left-0 w-full p-4 md:p-8 space-y-1 md:space-y-2 text-white">
-                <h2 className="text-xl md:text-4xl font-bold drop-shadow-md">
-                  {movie.title}
-                </h2>
+            {/* Dark gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/90" />
 
-                <div className="hidden md:flex items-center gap-2 text-sm md:text-base">
-                  <span>{movie.release_date?.substring(0, 4)}</span>
-                  <div className="hidden md:flex items-center gap-2">
-                    <span>•</span>
-                    <span>Rating: {(movie.vote_average).toFixed(1)}</span>
-                  </div>
-                </div>
+            {/* Text content */}
+            <div className="absolute bottom-0 left-0 w-full p-4 sm:p-6 md:p-8 lg:p-12 text-white">
+              {/* Title */}
+              <h2 className="text-lg sm:text-2xl md:text-4xl font-bold drop-shadow-lg">
+                {movie.title}
+              </h2>
 
-                <p className="hidden md:line-clamp-3 text-sm lg:text-base lg:max-w-2xl text-gray-200">
-                  {movie.overview}
-                </p>
-
-                <button className="hidden md:inline-block mt-4 bg-gradient-to-r from-red-500 to-orange-500 px-6 py-2 rounded-md hover:from-red-600 hover:to-orange-600 transition-all duration-200 font-semibold">
-                  Watch Now
-                </button>
+              {/* Meta row (year · rating) */}
+              <div className="mt-1 flex items-center gap-2 text-xs sm:text-sm md:text-base">
+                {movie.release_date && (
+                  <span>{movie.release_date.slice(0, 4)}</span>
+                )}
+                <span>•</span>
+                <span>{movie.vote_average.toFixed(1)}</span>
               </div>
+
+              {/* Overview (hidden on smallest devices) */}
+              <p className="mt-2 hidden sm:block sm:line-clamp-2 md:line-clamp-3 text-sm sm:text-base lg:text-lg text-gray-200 max-w-xl">
+                {movie.overview}
+              </p>
+
+              {/* Call‑to‑action */}
+              <button className="mt-4 bg-gradient-to-r from-red-500 to-orange-500 px-4 py-1.5 sm:px-6 sm:py-2 md:px-8 md:py-3 rounded-md font-semibold text-sm sm:text-base hover:from-red-600 hover:to-orange-600 transition">
+                Watch Now
+              </button>
             </div>
           </div>
         ))}
@@ -69,5 +76,3 @@ function SlidingBanner({ movies }: Props) {
     </div>
   );
 }
-
-export default SlidingBanner;

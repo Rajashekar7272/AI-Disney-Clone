@@ -61,7 +61,7 @@ Do not include any extra text like 'Here are' or numbering outside this.`,
     <div className="min-h-screen bg-gradient-to-r from-indigo-900/20 via-purple-900/20 to-pink-900/20">
       <div className="max-w-7xl 2xl:max-w-8xl mx-auto px-4 md:px-10 py-8 md:py-12 2xl:py-16">
         <h1 className="text-3xl md:text-4xl pt-10 2xl:text-5xl font-bold mb-8 md:mb-2 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-          {genre} Movies
+          {genre} Movies also Explore AI {genre} Movies
         </h1>
 
         <section>
