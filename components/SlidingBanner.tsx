@@ -66,7 +66,7 @@ export default function SlidingBanner({ movies }: Props) {
               </p>
 
               {/* Call‑to‑action */}
-              <button className="mt-4 bg-gradient-to-r from-red-500 to-orange-500 px-4 py-1.5 sm:px-6 sm:py-2 md:px-8 md:py-3 rounded-md font-semibold text-sm sm:text-base hover:from-red-600 hover:to-orange-600 transition">
+              <button className="mt-4 bg-gradient-to-r from-red-600 to-orange-500 px-4 py-1.5 sm:px-6 sm:py-2 md:px-8 md:py-3 rounded-md font-semibold text-sm sm:text-base hover:from-red-600 hover:to-orange-600 transition">
                 Watch Now
               </button>
             </div>
